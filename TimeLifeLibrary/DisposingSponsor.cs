@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Remoting.Lifetime;
 
-namespace TimeLifeServer
+namespace TimeLifeLibrary
 {
     class DisposingSponsor : ISponsor
     {
@@ -13,6 +13,7 @@ namespace TimeLifeServer
         public TimeSpan Renewal(ILease leaseInfo)
         {
             mManagedObj.Dispose();
+            Console.WriteLine(value: DateTime.Now + " - Вызван метод спонсора");
             return TimeSpan.FromSeconds(0);
         }
     }
