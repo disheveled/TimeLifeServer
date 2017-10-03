@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="MainClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableDataClientSponsor.cs" />
+    <Compile Include="UserClientSponsor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

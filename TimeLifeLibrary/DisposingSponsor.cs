@@ -13,7 +13,7 @@ namespace TimeLifeLibrary
         public TimeSpan Renewal(ILease leaseInfo)
         {
             mManagedObj.Dispose();
-            Console.WriteLine(value: DateTime.Now + " - Вызван метод спонсора");
+            Console.WriteLine(value: DateTime.Now + " - Вызван метод серверного спонсора ");
             return TimeSpan.FromSeconds(0);
         }
     }

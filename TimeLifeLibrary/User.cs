@@ -31,11 +31,11 @@ namespace TimeLifeLibrary
 
         public void Dispose()
         {
-            Console.WriteLine(value: DateTime.Now + " - Объект САО удалён.");
+            Console.WriteLine(value: DateTime.Now + " - Объект САО удалён методом Dispose().");
             GC.SuppressFinalize(this);
         }
           ~User()
         {
-            Console.WriteLine(value: DateTime.Now + " - Вызов финализатора.");   }
+            Console.WriteLine(value: DateTime.Now + " - Вызов финализатора CAO объекта.");   }
         }
 }

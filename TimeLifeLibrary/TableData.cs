@@ -5,12 +5,21 @@ namespace TimeLifeLibrary
 {
     public class TableData : MarshalByRefObject, IDisposable
     {
+        private  int leases;
+
         public TableData() {
 
             Console.WriteLine(value: DateTime.Now + " - Создана главная таблица с данными.");
-           
+            leases = 1;
 
 
+        }
+
+        public int leaseCount()
+        {
+
+
+            return leases;
         }
 
         public int Add(int n1, int n2)
@@ -21,12 +30,12 @@ namespace TimeLifeLibrary
 
         public void Dispose()
         {
-            Console.WriteLine(value: DateTime.Now + " - Объект WKO удалён.");
+            Console.WriteLine(value: DateTime.Now + " - Объект WKO удалён методом Dispose().");
             GC.SuppressFinalize(this);
         }
         ~TableData()
         {
-            Console.WriteLine(value: DateTime.Now + " - Вызов деструктора.");
+            Console.WriteLine(value: DateTime.Now + " - Вызов финализатора WKO объекта.");
             Console.ReadLine();
         }
     }
