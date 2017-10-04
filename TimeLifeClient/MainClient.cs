@@ -19,7 +19,7 @@ namespace TimeLifeClient
             Console.WriteLine(DateTime.Now + " - 5 + 2 = {0}", table.Add(3, 2));
 
             ILease leaseTable = (ILease)table.GetLifetimeService();
-            leaseTable.Register(new TableDataClientSponsor(table));
+            leaseTable.Register(new TableDataClientSponsor(table, 1));
             Console.WriteLine(DateTime.Now + " - Зарегистрирован Спонсор на удаление для WKO");
             Console.ReadLine();
 
