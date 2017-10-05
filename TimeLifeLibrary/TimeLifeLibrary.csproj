@@ -42,7 +42,9 @@
   <ItemGroup>
     <Compile Include="DisposingSponsor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SponsorManager.cs" />
     <Compile Include="TableData.cs" />
+    <Compile Include="TableDataClientSponsor.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

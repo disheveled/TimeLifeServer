@@ -1,26 +1,24 @@
 ﻿using System;
+using System.Runtime.Remoting.Lifetime;
 
 
 namespace TimeLifeLibrary
 {
     public class TableData : MarshalByRefObject, IDisposable
     {
-        private  int leases;
+
+
+        public SponsorManager manager;
 
         public TableData() {
 
             Console.WriteLine(value: DateTime.Now + " - Создана главная таблица с данными.");
-            leases = 1;
-
+            manager = new SponsorManager(this);
+            Console.WriteLine(value: DateTime.Now + " - Создан спонсор-менеджер.");
 
         }
 
-        public int leaseCount()
-        {
-
-
-            return leases;
-        }
+       
 
         public int Add(int n1, int n2)
         {
@@ -30,9 +28,30 @@ namespace TimeLifeLibrary
 
         public void Dispose()
         {
-            Console.WriteLine(value: DateTime.Now + " - Объект WKO удалён методом Dispose().");
-            GC.SuppressFinalize(this);
+
+
+
+            ILease leaseinfo = (ILease)this.GetLifetimeService();
+            if (leaseinfo.CurrentState.ToString() == "Active")
+            {
+
+                Console.WriteLine(value: DateTime.Now + " - Не удаляем ничо т.к. объект еще эктив.");
+                return;
+            }
+            else
+            {
+                Console.WriteLine(value: DateTime.Now + " - Вызываем Dispose(true).");
+
+                GC.SuppressFinalize(this);
+
+
+            }
         }
+            
+        
+
+
+
         ~TableData()
         {
             Console.WriteLine(value: DateTime.Now + " - Вызов финализатора WKO объекта.");

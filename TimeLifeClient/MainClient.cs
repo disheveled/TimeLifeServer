@@ -18,11 +18,12 @@ namespace TimeLifeClient
             Console.WriteLine(DateTime.Now + " - 5 + 2 = {0}", table.Add(1, 2));
             Console.WriteLine(DateTime.Now + " - 5 + 2 = {0}", table.Add(3, 2));
 
-            ILease leaseTable = (ILease)table.GetLifetimeService();
-            leaseTable.Register(new TableDataClientSponsor(table));
+            TableDataClientSponsor sp = new TableDataClientSponsor(table);
+            table.manager.Register(sp);
             Console.WriteLine(DateTime.Now + " - Зарегистрирован Спонсор на удаление для WKO");
             Console.ReadLine();
 
+            Console.ReadLine();
             User user = new User("Ololosha");
             ILease leaseInfo = (ILease)user.GetLifetimeService();
             Console.WriteLine(DateTime.Now + leaseInfo.CurrentLeaseTime.ToString());

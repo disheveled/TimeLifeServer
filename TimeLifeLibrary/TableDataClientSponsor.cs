@@ -3,16 +3,18 @@ using System.Runtime.Remoting.Lifetime;
 using TimeLifeLibrary;
 
 
-namespace TimeLifeClient
+namespace TimeLifeLibrary
 {
-    class TableDataClientSponsor : MarshalByRefObject, ISponsor
+    public class TableDataClientSponsor : MarshalByRefObject, ISponsor
     {
-        private IDisposable mManagedObj;
+        public  TableData mManagedObj;
         private int count = 0;
-        public TableDataClientSponsor(IDisposable managedObj)
+
+        public TableDataClientSponsor (TableData managedObj)
         {
             mManagedObj = managedObj;
             Console.WriteLine(value: DateTime.Now + " - Создан WKO спонсор");
+            
 
         }
         public TimeSpan Renewal(ILease leaseInfo)
@@ -21,33 +23,31 @@ namespace TimeLifeClient
             if (count == 0)
             {
                 count++;
-                
+
                 Console.WriteLine(value: DateTime.Now + " - Добавлено RenewOnCall к WKO");
                 Console.WriteLine(value: DateTime.Now + leaseInfo.CurrentState.ToString());
+                
                 return TimeSpan.FromSeconds(leaseInfo.RenewOnCallTime.Seconds);
             }
-            else {
+            else
+            {
                 Console.WriteLine(value: DateTime.Now + " - Не добавляем RenewOnCall к WKO");
-                if () {
 
+                if (mManagedObj.manager.SponsorsCount() == 1) {
 
+                    mManagedObj.Dispose();
+                    Console.WriteLine(value: DateTime.Now + " - DISPOSE!!!");
+                    mManagedObj.manager.Unregister(this);
                 }
-
-
+                mManagedObj.manager.Unregister(this);
                 return TimeSpan.FromSeconds(0);
+
+               
 
             }
 
-            
 
-
-            //  Console.WriteLine(value: DateTime.Now + " - Вызван метод удаления для WKO.");
-            //  Console.WriteLine(value: DateTime.Now + leaseInfo.CurrentState.ToString());
-            //   mManagedObj.Dispose();
-
-            //  return TimeSpan.FromSeconds(0);
-
-
+        
 
 
         }
